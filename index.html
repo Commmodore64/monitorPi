@@ -3,11 +3,25 @@
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/raspberry.png" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
+    />
     <title>MonitorPi</title>
   </head>
   <body>
     <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
+    <script type="module" src="/src/main.jsx">
+            if (window.matchMedia('(display-mode: standalone)').matches) {
+        // Si la aplicación se ejecuta en el modo standalone (como una PWA instalada en la pantalla de inicio),
+        // no se realizará la transición a pantalla completa.
+        console.log('La aplicación se está ejecutando en modo standalone');
+      } else {
+        // Si la aplicación se ejecuta en un navegador, se realizará la transición a pantalla completa.
+        document.documentElement.requestFullscreen().catch((error) => {
+          console.log('Error al entrar en pantalla completa:', error);
+        });
+      }
+    </script>
   </body>
 </html>
